@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--search bar -->
+    <record id="view_tmx_track_search" model="ir.ui.view">
+        <field name="name">custom.tracking.search</field>
+        <field name="model">custom.tracking</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <field name="company_name"/>
+                <field name="originator_email"/>
+                <field name="reference"/>
+                <field name="docu_type"/>
+            </search>
+        </field>
+    </record>
+    <!--  List View -->
+    <record id="custom_track_tree" model="ir.ui.view">
+        <field name="name">custom.tracking.tree</field>
+        <field name="model">custom.tracking</field>
+        <field name="arch" type="xml">
+            <tree string="TMX Web tracking" sample="1" default_order="creation_date desc">
+                <field name="reference" optional="show"/>
+                <field name="docu_type" optional="show"/>
+                <field name="creation_date" optional="show"/>
+                <field name="originator_email" optional="show"/>
+                <field name="company_name" optional="show"/>
+                <button name="open_detail_view" string="PROFILE" type="object"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--  Template -->
+    <record id="action_custom_track" model="ir.actions.act_window">
+        <field name="name">Web Tracking</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">custom.tracking</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+    </record>
+    <menuitem id="menu_custom_tracking"
+      action="action_custom_track"
+      name="TMX Tracking"
+      sequence="2"/>
+        <menuitem
+                id="menu_profiles"
+                name="Profiles"
+                parent="menu_custom_tracking"
+                sequence="0"/>
+                <menuitem
+                    id="menu_open_profiles"
+                    name="Open Profiles"
+                    action="action_custom_profile"
+                    parent="menu_profiles"
+                    sequence="1"/>
+</odoo>

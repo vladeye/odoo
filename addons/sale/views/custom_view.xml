@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--search bar -->
+    <record id="view_tmx_crm_search" model="ir.ui.view">
+        <field name="name">custom.report.search</field>
+        <field name="model">custom.report</field>
+        <field name="arch" type="xml">
+            <search string="Search">
+                <field name="company_name"/>
+                <field name="contact_name"/>
+                <field name="contact_email"/>
+                <field name="branch"/>
+                <field name="year"/>
+                <separator/>
+                <group expand="0" name="group_by" string="Group By">
+                    <filter name="group_company" string="Company" context="{'group_by': 'company_name'}"/>
+                    <filter name="group_contact" string="Contact" context="{'group_by': 'contact_name'}"/>
+                    <filter name="group_year" string="Year" context="{'group_by': 'year'}"/>
+                    <filter name="group_branch" string="Branch" context="{'group_by': 'branch'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!--  List View -->
+    <record id="custom_report_tree" model="ir.ui.view">
+            <field name="name">custom.report.tree</field>
+            <field name="model">custom.report</field>
+            <field name="arch" type="xml">
+                <tree string="TMX CRM" sample="1" default_order="june desc">
+                    <button name="open_crm_profile" string="EMAIL/NOTES" type="object"/>
+                    <button name="open_custom_view" string="JOBS" type="object"/>
+                    <button name="open_custom_quote" string="QUOTES" type="object"/>
+                    <field name="partner_id" invisible="1"/>
+                    <field name="company_name" optional="show"/>
+                    <field name="contact_name" optional="show"/>
+                    <field name="contact_email" optional="show"/>
+                    <field name="branch" optional="show"/>
+                    <field name="year" optional="show"/>
+                    <field name="january" optional="show"/>
+                    <field name="february" optional="show"/>
+                    <field name="march" optional="show"/>
+                    <field name="april" optional="show"/>
+                    <field name="may" optional="show"/>
+                    <field name="june" optional="show"/>
+                    <field name="july" optional="show"/>
+                    <field name="august" optional="show"/>
+                    <field name="september" optional="show"/>
+                    <field name="october" optional="show"/>
+                    <field name="november" optional="show"/>
+                    <field name="december" optional="show"/>
+                    <field name="total" optional="show"/>
+                    <field name="open_jobs" optional="show"/>
+                    <field name="quotes" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+    <!--Form View  -->
+    <record id="custom_report_form" model="ir.ui.view">
+            <field name="name">custom.report.form</field>
+            <field name="model">custom.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <!--
+                        <group>
+                           <button name="action_get_invoices" string="GO TO INVOICES" type="object"/>
+                        </group>
+                        -->
+                        <group>
+                            <field name="company_name" optional="show"/>
+                            <field name="contact_name" optional="show"/>
+                            <field name="contact_email" optional="show"/>
+                            <field name="phone_number" optional="show"/>
+                            <field name="branch" optional="show"/>
+                            <field name="open_jobs" optional="show"/>
+                            <field name="quotes" optional="show"/>
+                        </group>
+                        <notebook>
+                            <page string="Details" name="details">
+                                <button name="open_custom_view" string="Historic Jobs Details" type="object"/>
+                                <button name="open_custom_quote" string="Customer Quotes" type="object"/>
+                            </page>
+                            <page string="Other Info">
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" options="{'open_attachments': False}"/>
+                        <field name="message_ids"/>
+	                </div>
+                </form>
+            </field>
+        </record>
+
+    <!--  Template -->
+    <record id="action_custom_report" model="ir.actions.act_window">
+        <field name="name">TMX CRM</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">custom.report</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{'search_default_group_company' : True, 'search_default_group_year' : True, 'search_default_group_branch' : True}</field>
+    </record>
+    <menuitem id="menu_custom_report"
+          action="action_custom_report"
+          name="TMX CRM"
+          sequence="1"/>
+        <!--<menuitem
+            id="menu_quotes"
+            name="All Quotes"
+            parent="menu_custom_report"
+            sequence="0"/>
+            <menuitem
+                id="menu_open_quotes"
+                name="QUOTES"
+                action="action_custom_quote"
+                parent="menu_quotes"
+                sequence="1"/>
+        <menuitem
+                id="menu_profile"
+                name="CRM Profiles"
+                parent="menu_custom_report"
+                sequence="30"/>
+                <menuitem
+                    id="menu_open_profile"
+                    name="All Profiles"
+                    action="action_crm_profile"
+                    parent="menu_profile"
+                    sequence="1"/>-->
+</odoo>

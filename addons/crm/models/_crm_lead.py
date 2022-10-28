@@ -575,35 +575,6 @@ class Lead(models.Model):
     # ------------------------------------------------------------
     # ORM
     # ------------------------------------------------------------
-    
-    @api.model
-    def _is_email_used_by_lead_or_contact(self, email=None):
-
-        email_crm = email.strip().lower()
-
-        search_domain_leads = ['|', ('email_normalized', '=', email_crm), ('email_from', '=', email_crm)]
-
-        leads = self.env['crm.lead'].search(search_domain_leads, order='name')
-        leads_name = leads.mapped('name')
-
-        search_domain_contacts = ['|', ('email_normalized', '=', email_crm), ('email', '=', email_crm)]
-        search_domain_contacts += [('type', '=', 'contact')]
-        search_domain_contacts += [('is_company', '=', False)]
-
-        contacts = self.env['res.partner'].search(search_domain_contacts, order='name')
-        contacts_name = contacts.mapped('name')
-
-        if len(leads_name) > 0 or len(contacts_name) > 0:
-	    
-            leads_contacts_names =  "Leads: %s\nContacts: %s" % (", ".join(leads_name), ", ".join(contacts_name))
-
-            error_msg = 'Duplicate email: %s for leads/contacts.\n\n%s' % (email_crm, leads_contacts_names)
-
-            raise UserError(
-	            _(error_msg)
-	        )
-
-        return False
 
     def _auto_init(self):
         res = super(Lead, self)._auto_init()
@@ -616,15 +587,13 @@ class Lead(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if not self._is_email_used_by_lead_or_contact(vals['email_from']):
-	            if vals.get('website'):
-                        vals['website'] = self.env['res.partner']._clean_website(vals['website'])
-	    
+            if vals.get('website'):
+                vals['website'] = self.env['res.partner']._clean_website(vals['website'])
         leads = super(Lead, self).create(vals_list)
 
         for lead, values in zip(leads, vals_list):
             if any(field in ['active', 'stage_id'] for field in values):
-                    lead._handle_won_lost(values)
+                lead._handle_won_lost(values)
 
         return leads
 

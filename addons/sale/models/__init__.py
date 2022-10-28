@@ -14,3 +14,9 @@ from . import sales_team
 from . import payment
 from . import utm
 from . import mail_compose_message
+from . import custom_report
+from . import custom_hist
+from . import custom_tracking
+from . import custom_tracking_profile
+from . import custom_crm_profile
+

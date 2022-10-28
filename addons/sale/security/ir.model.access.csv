@@ -56,3 +56,8 @@ access_sale_payment_acquirer_onboarding_wizard,access.sale.payment.acquirer.onbo
 access_sale_advance_payment_inv,access.sale.advance.payment.inv,model_sale_advance_payment_inv,sales_team.group_sale_salesman,1,1,1,0
 access_sale_order_cancel,access.sale.order.cancel,model_sale_order_cancel,sales_team.group_sale_salesman,1,1,1,0
 access_payment_link_wizard_sale,access.payment.link.wizard.sale,model_payment_link_wizard,sales_team.group_sale_salesman,1,1,1,0
+access_custom_hist,access.access_custom_hist,model_custom_hist,sales_team.group_sale_manager,1,1,1,1
+access_custom_report,access.access_custom_report,model_custom_report,sales_team.group_sale_manager,1,1,1,1
+access_custom_hist,access.access_custom_hist,model_custom_hist,sales_team.group_sale_manager,1,1,1,1
+access_custom_tracking,access.access_custom_tracking,model_custom_tracking,sales_team.group_sale_manager,1,1,1,1
+access_custom_profile,access.access_custom_profile,model_custom_profile,sales_team.group_sale_manager,1,1,1,1

@@ -101,28 +101,24 @@
         <field name="view_mode">tree</field>
         <field name="context">{'search_default_group_company' : True, 'search_default_group_year' : True, 'search_default_group_branch' : True}</field>
     </record>
-    <menuitem id="menu_custom_report"
-          action="action_custom_report"
-          name="TMX CRM"
-          sequence="1"/>
-        <!--<menuitem
-            id="menu_quotes"
-            name="All Quotes"
-            parent="menu_custom_report"
-            sequence="0"/>
-            <menuitem
-                id="menu_open_quotes"
-                name="QUOTES"
-                action="action_custom_quote"
-                parent="menu_quotes"
-                sequence="1"/>
+    <menuitem
+        id="menu_quotes"
+        name="CRM Report"
+        parent="menu_custom_report"
+        sequence="0"/>
         <menuitem
+            id="menu_open_quotes"
+            name="Report"
+            action="action_custom_report"
+            parent="menu_quotes"
+            sequence="1"/>
+        <!--<menuitem
                 id="menu_profile"
                 name="CRM Profiles"
                 parent="menu_custom_report"
                 sequence="30"/>
                 <menuitem
-                    id="menu_open_profile"
+                    id="menu_open_quotes"
                     name="All Profiles"
                     action="action_crm_profile"
                     parent="menu_profile"

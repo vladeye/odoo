@@ -11,6 +11,7 @@ class CustomHist(models.Model):
     originator_email = fields.Text(string="Email", readonly=True)
     docu_type = fields.Text(string="Type", readonly=True)
     creation_date = fields.Date(string="Creation Date", readonly=True)
+    validity_date = fields.Date(string="Validity Date", readonly=True)
     company_name = fields.Text(string="Company", readonly=True)
     ship_to_name = fields.Text(string="Ship to Name", readonly=True)
     ship_to_city = fields.Text(string="Ship to City", readonly=True)
@@ -24,7 +25,13 @@ class CustomHist(models.Model):
     def init(self):
         tools.drop_view_if_exists(self._cr, self._table)
         self._cr.execute("""CREATE OR REPLACE VIEW %s AS (
-                        select  id as id, originator_email, docu_type, creation_date, company_name, ship_to_name, ship_to_city, 
+                        select  id as id, originator_email, docu_type, 
+                            CASE 
+                                  WHEN docu_type = 'JOB' THEN creation_date
+                                  WHEN docu_type = 'QUOTE' THEN date_order
+                                  ELSE creation_date  
+                            END as creation_date, validity_date,
+                            company_name, ship_to_name, ship_to_city, 
                         ship_to_state, ship_to_zipcode, branch, reference, job_type,
                         case WHEN docu_type = 'JOB' THEN 1 ELSE 0 END total_jobs
                         from jobs_quotes_tracking where docu_type != 'TRACKING'

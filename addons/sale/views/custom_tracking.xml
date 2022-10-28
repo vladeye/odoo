@@ -46,10 +46,10 @@
                 name="Profiles"
                 parent="menu_custom_tracking"
                 sequence="0"/>
-                <menuitem
+               <!--<menuitem
                     id="menu_open_profiles"
                     name="Open Profiles"
                     action="action_custom_profile"
                     parent="menu_profiles"
-                    sequence="1"/>
+                    sequence="1"/>-->
 </odoo>
